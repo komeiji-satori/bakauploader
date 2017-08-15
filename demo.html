@@ -1,0 +1,25 @@
+<script src="baka_uploader.js"></script>
+<button id="upload">Select File</button>
+<script type="text/javascript">
+BakaUploader.init({
+    addr: 'upload.php',
+    selector: '#upload',
+    max_size: 64 * 1024 * 1024,
+    filter: ['application/zip'],
+    multiple: true,
+    file_count: 2,
+    data: { token: 'A52FA4AF6W4',password:23333333},
+    onselect: function(data) {
+        console.log(data);
+    },
+    onprogress: function(e) {
+        console.log(e);
+    },
+    onerror: function(e) {
+        console.log(e);
+    },
+    onsuccess: function(data) {
+        console.log(data);
+    }
+});
+</script>
