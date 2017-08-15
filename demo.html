@@ -1,5 +1,8 @@
 <script src="baka_uploader.js"></script>
-<button id="upload">Select File</button>
+<button id="upload">Select File</button><br><br>
+<ul id="file_list"></ul>
+<progress id="progress" value="0" max="100"></progress> 
+<p id="result"></p>
 <script type="text/javascript">
 BakaUploader.init({
     addr: 'upload.php',
@@ -10,15 +13,22 @@ BakaUploader.init({
     file_count: 2,
     data: { token: 'A52FA4AF6W4',password:23333333},
     onselect: function(data) {
-        console.log(data);
+        var dom = document.getElementById('file_list');
+        for (var i = 0; i < data.length; i++) {
+            var li = document.createElement('li');
+            li.append(data[i].name+",文件大小："+data[i].size);
+            dom.appendChild(li);
+        }
     },
     onprogress: function(e) {
-        console.log(e);
+        console.log("Progress:"+e+"%")
+        document.getElementById('progress').value = e;
     },
     onerror: function(e) {
         console.log(e);
     },
     onsuccess: function(data) {
+        document.getElementById('result').innerHTML=data;
         console.log(data);
     }
 });
